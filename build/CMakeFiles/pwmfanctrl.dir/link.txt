@@ -1,0 +1,1 @@
+/usr/bin/aarch64-linux-gnu-g++ -g -rdynamic CMakeFiles/pwmfanctrl.dir/main.cpp.o CMakeFiles/pwmfanctrl.dir/src/pwm.cpp.o -o pwmfanctrl 

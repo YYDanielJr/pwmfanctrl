@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="Linux-aarch64-linux-gnu-g++"
+	BuildStamp="20240425-1436-Experimental"
+	Name="orangepi3b"
+	Generator="ctest-3.22.1"
+	CompilerName="/usr/bin/aarch64-linux-gnu-g++"
+	CompilerVersion="11.4.0"
+	OSName="Linux"
+	Hostname="orangepi3b"
+	OSRelease="5.10.160-rockchip-rk356x"
+	OSVersion="#1.0.4 SMP Wed Apr 24 14:48:23 UTC 2024"
+	OSPlatform="aarch64"
+	Is64Bits="1"
+	VendorString=""
+	VendorID="Unknown Manufacturer"
+	FamilyID="8"
+	ModelID="0"
+	ProcessorCacheSize="0"
+	NumberOfLogicalCPU="4"
+	NumberOfPhysicalCPU="1"
+	TotalVirtualMemory="1961"
+	TotalPhysicalMemory="3922"
+	LogicalProcessorsPerPhysical="4"
+	ProcessorClockFrequency="0"
+	>
+	<Testing>
+		<StartDateTime>Apr 25 23:06 CST</StartDateTime>
+		<StartTestTime>1714057563</StartTestTime>
+		<TestList/>
+		<EndDateTime>Apr 25 23:06 CST</EndDateTime>
+		<EndTestTime>1714057563</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

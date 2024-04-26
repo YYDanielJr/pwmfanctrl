@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/yydaniel/sourcefiles/pwmfanctrl/build",
+  "command": "/usr/bin/aarch64-linux-gnu-g++ -g -std=gnu++20 -o CMakeFiles/pwmfanctrl.dir/main.cpp.o -c /home/yydaniel/sourcefiles/pwmfanctrl/main.cpp",
+  "file": "/home/yydaniel/sourcefiles/pwmfanctrl/main.cpp"
+},
+{
+  "directory": "/home/yydaniel/sourcefiles/pwmfanctrl/build",
+  "command": "/usr/bin/aarch64-linux-gnu-g++ -g -std=gnu++20 -o CMakeFiles/pwmfanctrl.dir/src/pwm.cpp.o -c /home/yydaniel/sourcefiles/pwmfanctrl/src/pwm.cpp",
+  "file": "/home/yydaniel/sourcefiles/pwmfanctrl/src/pwm.cpp"
+}
+]
