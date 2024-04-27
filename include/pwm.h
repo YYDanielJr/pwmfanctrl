@@ -2,7 +2,7 @@
  * @Author: Y.Y. Daniel 626986815@qq.com
  * @Date: 2024-04-25 22:37:46
  * @LastEditors: Y.Y. Daniel 626986815@qq.com
- * @LastEditTime: 2024-04-26 20:03:25
+ * @LastEditTime: 2024-04-27 10:49:47
  * @FilePath: /pwmfanctrl/include/pwm.h
  * @Description: 调用系统pwm的主函数
  */
@@ -16,6 +16,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <cstring>
+#include <cstdio>
 
 #define PATH_NOT_SET 255
 #define UNABLE_TO_OPEN_FOLDER 1

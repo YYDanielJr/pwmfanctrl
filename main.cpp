@@ -2,7 +2,7 @@
  * @Author: Y.Y. Daniel 626986815@qq.com
  * @Date: 2024-04-25 22:35:59
  * @LastEditors: Y.Y. Daniel 626986815@qq.com
- * @LastEditTime: 2024-04-27 10:29:16
+ * @LastEditTime: 2024-04-27 16:44:33
  * @FilePath: /pwmfanctrl/main.cpp
  * @Description: 主函数，采用命令形式
  * 命令用法：pwmfanctrl --pwmchip X （进入交互式界面，设置周期和占空比）
@@ -35,12 +35,8 @@ int main(int argc, char** argv){
 
             }
         }
-        else if(argv[1] == "--pwmchip") {
-            if(argc == 2 || argc == 4 || argc == 6) { // 参数错误
-                std::cerr << "Missing necessary argument." << std::endl;
-                exit(2);
-            }
-            else if(argc == 3 && isDigit(argv[2])) {    // 需要进入交互界面，输入周期和占空比
+        else if(strcmp(argv[1], "--pwmchip") == 0) {
+            if(argc == 3 && isDigit(argv[2])) {    // 需要进入交互界面，输入周期和占空比
                 std::cout << "Please input the period and the duty cycle: " << std::endl;
                 std::cin >> period >> duty_cycle;
                 Pwm pwm(stoi(argv[2]));
@@ -48,9 +44,9 @@ int main(int argc, char** argv){
             }
             else if(argc == 4 && strcmp(argv[3], "--stop") == 0) {
                 Pwm pwm(stoi(argv[2]));
-                return pwm.disable();
+                return pwm.quickStart(1000000, 1000000);
             }
-            else if(argc == 5 && strcmp(argv[4], "--set-percentage")) {    // 提供百分比，默认以1000000的周期计算
+            else if(argc == 5 && strcmp(argv[3], "--set-percentage") == 0) {    // 提供百分比，默认以1000000的周期计算
                 Pwm pwm(stoi(argv[2]));
                 period = 1000000;
                 duty_cycle = period / 100 * stou(argv[4]);

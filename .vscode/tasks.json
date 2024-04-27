@@ -1,0 +1,36 @@
+{
+    "tasks": [
+        {
+            "type": "shell", //注意这个type，因为这是在terminal 中执行的命令，所以type要写作shell
+            "label": "configure cmake",
+            "command": "cmake",
+            "args": [
+                "-B",
+                "${fileDirname}/build" //在make之前，先要执行cmake -B ./build的命令创建一个build的文件夹和相关文件用于后续编译
+            ],
+            "options": {
+                "cwd": "${fileDirname}",
+            }
+        },
+        {
+            "type": "shell", //注意这个type，因为这是在terminal 中执行的命令，所以type要写作shell
+            "label": "build cmake",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${fileDirname}/build", //在这里一定要注意将 关键字与关键字对应的值分开写，如果写作"--build ${fileDirname}/build"，报错不识别 "-build ${fileDirname}/build"
+                "--config",
+                "Debug", // config 可以写作Debug 或者是 Release
+                "--target",
+                "pwmfanctrl", //生成对应目标，这是跟CMakeLists.txt 文件中 add_excutable() 命令中所对应的。
+            ],
+            "options": {
+                "cwd": "${fileDirname}", // 这一步非常重要，需要将cwd设置到对应的CMakeLists.txt 的目录项，否则会找不到该文件，或者用其他目录下的该文件
+            },
+            "dependsOn": [
+                "configure cmake"
+            ] //也就是运行上述的cmake -B ./build命令
+        },
+    ],
+    "version": "2.0.0"
+}
