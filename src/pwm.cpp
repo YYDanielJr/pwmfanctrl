@@ -2,7 +2,7 @@
  * @Author: Y.Y. Daniel 626986815@qq.com
  * @Date: 2024-04-25 22:37:14
  * @LastEditors: Y.Y. Daniel 626986815@qq.com
- * @LastEditTime: 2024-04-26 19:49:25
+ * @LastEditTime: 2024-04-26 23:34:04
  * @FilePath: /pwmfanctrl/src/pwm.cpp
  * @Description: 调用系统pwm的主函数
  */
@@ -126,6 +126,14 @@ uint32_t Pwm::getDutyCycle() {
     return stou(buf);
 }
 
+int Pwm::quickStart(uint32_t period, uint32_t dutyCycle) {
+    initialize();
+    setPeriod(period);
+    setDutyCycle(dutyCycle);
+    enable();
+    return 0;
+}
+
 // 字符串转uint32_t
 uint32_t stou(char* str) {
     uint32_t ret = 0;
@@ -138,4 +146,26 @@ uint32_t stou(char* str) {
         ret += 10 * ret + str[i];
     }
     return ret;
+}
+
+int stoi(char* str) {
+    int ret = 0;
+    int i = 0;
+    while(str[i] != 0) {
+        i++;
+    }
+    i--;
+    for(;i >= 0; i--) {
+        ret += 10 * ret + str[i];
+    }
+    return ret;
+}
+
+bool isDigit(char* str) {
+    for(int i = 0; i < strlen(str); i++) {
+        if(!(str[i] >= '0' && str[i] <= '9')) {
+            return false;
+        }
+    }
+    return true;
 }

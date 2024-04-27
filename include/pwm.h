@@ -15,6 +15,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <cstring>
 
 #define PATH_NOT_SET 255
 #define UNABLE_TO_OPEN_FOLDER 1
@@ -36,8 +37,11 @@ public:
     int setDutyCycle(uint32_t dutyCycle);
     int disable();
     int saveProfile(std::string profileName);
+    int quickStart(uint32_t period, uint32_t dutyCycle);
     uint32_t getPeriod();
     uint32_t getDutyCycle();
 };
 
 uint32_t stou(char* str);
+int stoi(char* str);
+bool isDigit(char* str);

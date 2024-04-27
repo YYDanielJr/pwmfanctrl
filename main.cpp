@@ -2,7 +2,7 @@
  * @Author: Y.Y. Daniel 626986815@qq.com
  * @Date: 2024-04-25 22:35:59
  * @LastEditors: Y.Y. Daniel 626986815@qq.com
- * @LastEditTime: 2024-04-26 23:21:28
+ * @LastEditTime: 2024-04-27 10:29:16
  * @FilePath: /pwmfanctrl/main.cpp
  * @Description: 主函数，采用命令形式
  * 命令用法：pwmfanctrl --pwmchip X （进入交互式界面，设置周期和占空比）
@@ -14,6 +14,7 @@
  */
 
 #include <iostream>
+#include <cstring>
 #include "include/pwm.h"
 
 int main(int argc, char** argv){
@@ -26,7 +27,7 @@ int main(int argc, char** argv){
         uint32_t period;
         uint32_t duty_cycle;
         if(argv[1] == "--load-profile") {
-            if(argc == 2) {
+            if(argc == 2) { // 参数错误
                 std::cerr << "Missing necessary argument." << std::endl;
                 exit(2);
             }
@@ -35,11 +36,65 @@ int main(int argc, char** argv){
             }
         }
         else if(argv[1] == "--pwmchip") {
-            if(argc == 2) {
-                
+            if(argc == 2 || argc == 4 || argc == 6) { // 参数错误
+                std::cerr << "Missing necessary argument." << std::endl;
+                exit(2);
+            }
+            else if(argc == 3 && isDigit(argv[2])) {    // 需要进入交互界面，输入周期和占空比
+                std::cout << "Please input the period and the duty cycle: " << std::endl;
+                std::cin >> period >> duty_cycle;
+                Pwm pwm(stoi(argv[2]));
+                return pwm.quickStart(period, duty_cycle);
+            }
+            else if(argc == 4 && strcmp(argv[3], "--stop") == 0) {
+                Pwm pwm(stoi(argv[2]));
+                return pwm.disable();
+            }
+            else if(argc == 5 && strcmp(argv[4], "--set-percentage")) {    // 提供百分比，默认以1000000的周期计算
+                Pwm pwm(stoi(argv[2]));
+                period = 1000000;
+                duty_cycle = period / 100 * stou(argv[4]);
+                return pwm.quickStart(period, duty_cycle);
+            }
+            else if(argc == 7 && strcmp(argv[5], "--save-profile") == 0) {    // 提供占空比和周期，直接设置
+                Pwm pwm(stoi(argv[2]));
+                return pwm.quickStart(stou(argv[4]), stou(argv[6]));
+            }
+            else if(argc == 7 && (strcmp(argv[5], "--set-duty-cycle") == 0 || strcmp(argv[5], "--set-period") == 0)) {    // 提供占空比和周期，直接设置
+                if(strcmp(argv[3], "--set-duty-cycle") == 0) {
+                    duty_cycle = stou(argv[4]);
+                }
+                if(strcmp(argv[3], "--set-period") == 0) {
+                    period = stou(argv[4]);
+                }
+                if(strcmp(argv[5], "--set-duty-cycle") == 0) {
+                    duty_cycle = stou(argv[6]);
+                }
+                if(strcmp(argv[5], "--set-period") == 0) {
+                    period = stou(argv[6]);
+                }
+                Pwm pwm(stoi(argv[2]));
+                return pwm.quickStart(period, duty_cycle);
+            }
+            else if(argc == 9) {    // 设置占空比，并保存配置，这里的命令判断还不完善
+                if(strcmp(argv[3], "--set-duty-cycle") == 0) {
+                    duty_cycle = stou(argv[4]);
+                }
+                if(strcmp(argv[3], "--set-period") == 0) {
+                    period = stou(argv[4]);
+                }
+                if(strcmp(argv[5], "--set-duty-cycle") == 0) {
+                    duty_cycle = stou(argv[6]);
+                }
+                if(strcmp(argv[5], "--set-period") == 0) {
+                    period = stou(argv[6]);
+                }
+                Pwm pwm(stoi(argv[2]));
+                return pwm.quickStart(period, duty_cycle);
             }
             else {
-
+                std::cerr << "Invalid argument. " << std::endl;
+                exit(2);
             }
         }
         else {
