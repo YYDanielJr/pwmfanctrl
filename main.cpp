@@ -2,7 +2,7 @@
  * @Author: Y.Y. Daniel 626986815@qq.com
  * @Date: 2024-04-25 22:35:59
  * @LastEditors: Y.Y. Daniel 626986815@qq.com
- * @LastEditTime: 2024-04-27 16:44:33
+ * @LastEditTime: 2024-07-02 14:02:35
  * @FilePath: /pwmfanctrl/main.cpp
  * @Description: 主函数，采用命令形式
  * 命令用法：pwmfanctrl --pwmchip X （进入交互式界面，设置周期和占空比）
@@ -92,6 +92,12 @@ int main(int argc, char** argv){
                 std::cerr << "Invalid argument. " << std::endl;
                 exit(2);
             }
+        }
+        else if(strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-h") == 0) {
+            std::cout << "Usage:\n" << "pwmfanctrl --pwmchip X" << std::endl << "pwmfanctrl --pwmchip X --set-period <period> --set-duty-cycle <duty-cycle> [--save-profile <profile_path_name>]" << std::endl
+                << "pwmfanctrl --pwmchip X --set-percentage <percentage> [--save-profile <profile_path_name>]" 
+                << std::endl << "pwmfanctrl --load-profile <profile_path_name>" 
+                << std::endl << "pwmfanctrl --pwmchip X --stop" << std::endl << "Use root if necessary.\n";
         }
         else {
             std::cerr << "Invalid argument: " << argv[1] << std::endl;
